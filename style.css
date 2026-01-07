@@ -2091,14 +2091,14 @@ body {
 
 /* Character specific borders removed */
 .carousel-slide[data-id="pred_buu"].current-slide .character-wrapper::after,
-.carousel-slide[data-id="pred_hatchiyack"].current-slide .character-wrapper::after,
+.carousel-slide[data-id="pred_gomah"].current-slide .character-wrapper::after,
 .carousel-slide[data-id="pred_bojack"].current-slide .character-wrapper::after,
 .carousel-slide[data-id="pred_trunks"].current-slide .character-wrapper {
     border-color: transparent;
 }
 
 .carousel-slide[data-id="pred_buu"].current-slide .character-wrapper,
-.carousel-slide[data-id="pred_hatchiyack"].current-slide .character-wrapper,
+.carousel-slide[data-id="pred_gomah"].current-slide .character-wrapper,
 .carousel-slide[data-id="pred_bojack"].current-slide .character-wrapper,
 .carousel-slide[data-id="pred_trunks"].current-slide .character-wrapper {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
