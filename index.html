@@ -80,11 +80,11 @@
                         </button>
                         <div class="lang-dropdown" id="langDropdown">
                             <a href="#" class="lang-option" onclick="setLanguage('fr'); return false;" id="lang-fr">
-                                <span class="lang-flag">🇫🇷</span>
+                                <img src="assets/flag_fr.png" class="lang-flag-img" alt="Français">
                                 <span>Français</span>
                             </a>
                             <a href="#" class="lang-option" onclick="setLanguage('en'); return false;" id="lang-en">
-                                <span class="lang-flag">🇺🇸</span>
+                                <img src="assets/flag_us.png" class="lang-flag-img" alt="English">
                                 <span>English</span>
                             </a>
                         </div>
@@ -744,7 +744,7 @@
         <div id="construction-modal" class="modal-overlay" onclick="closeConstructionModal()">
             <div class="modal-content" onclick="event.stopPropagation()">
                 <img src="assets/construction_icon.png" alt="Under Construction" class="construction-icon">
-                <p class="construction-text" data-i18n="construction_text">TRAVAUX EN COURS</p>
+                <p class="construction-text" id="construction-msg" data-i18n="construction_text">TRAVAUX EN COURS</p>
             </div>
         </div>
         <script>

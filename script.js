@@ -296,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const translations = {
     fr: {
-        header_title: "Chronologie des sorties majeures : <span class='text-sparking'>Sparking</span>, <span class='text-ll'>Legends Limited</span> & <span class='text-ultra' data-text='Ultra'>Ultra</span>",
+        header_title: "Calendrier des Sorties Majeures : <span class='text-sparking'>Sparking</span>, <span class='text-ll'>Legends Limited</span> & <span class='text-ultra' data-text='Ultra'>Ultra</span>",
         month_jan: "JANVIER",
         month_feb: "FÉVRIER",
         month_mar: "MARS",
@@ -313,33 +313,7 @@ const translations = {
         predict_label: "PRÉDICTION",
         prediction_modal_title: "<span class='large-q'>Q</span>UI SERA LE <span class='highlight-yellow'>PREMIER</span> <br class='mobile-only'>PERSONNAGE MAJEUR <br class='desktop-only'>DU MOIS DE <br class='mobile-only'><span class='highlight-yellow'>JANVIER</span> ?",
         btn_choose: "CHOISIR",
-        btn_choose: "CHOISIR",
         lang_button_text: "Langues",
-        name_pred_buu: "BUUHAN",
-        name_pred_gomah: "GOMAH",
-        name_pred_bojack: "BOJACK",
-        name_pred_trunks: "TRUNKS",
-        name_pred_vegeta_ssj3_daima: "VEGETA SSJ3"
-    },
-    en: {
-        header_title: "Major Release Timeline: <span class='text-sparking'>Sparking</span>, <span class='text-ll'>Legends Limited</span> & <span class='text-ultra' data-text='Ultra'>Ultra</span>",
-        month_jan: "JANUARY",
-        month_feb: "FEBRUARY",
-        month_mar: "MARCH",
-        month_apr: "APRIL",
-        month_may: "MAY",
-        month_jun: "JUNE",
-        month_jul: "JULY",
-        month_aug: "AUGUST",
-        month_sep: "SEPTEMBER",
-        month_oct: "OCTOBER",
-        month_nov: "NOVEMBER",
-        month_dec: "DECEMBER",
-        footer_disclaimer: "©Bird Studio/Shueisha and Toei Animation.<br>©Bandai Namco Entertainment Inc.<br>Unofficial fan site, not affiliated.",
-        predict_label: "PREDICTION",
-        prediction_modal_title: "<span class='large-q'>W</span>HO WILL BE THE <span class='highlight-yellow'>FIRST</span> <br class='mobile-only'>MAJOR CHARACTER <br class='desktop-only'>OF <br class='mobile-only'><span class='highlight-yellow'>JANUARY</span> ?",
-        btn_choose: "CHOOSE",
-        lang_button_text: "Language",
         name_pred_buu: "BUUHAN",
         name_pred_gomah: "GOMAH",
         name_pred_bojack: "BOUJACK",
@@ -405,6 +379,12 @@ function setLanguage(lang) {
             el.innerHTML = translations[lang][key];
         }
     });
+
+    // 2b. Explicitly update construction text to ensure it catches dynamic changes
+    const constructionMsg = document.getElementById('construction-msg');
+    if (constructionMsg && translations[lang] && translations[lang].construction_text) {
+        constructionMsg.textContent = translations[lang].construction_text;
+    }
 
     // Re-render prediction UI to update text
     const savedPrediction = localStorage.getItem('prediction_2026_id');
