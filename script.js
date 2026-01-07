@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function initFebEasterEgg(card) {
         let resetTimer = null;
-        const audio = new Audio('assets/audio/allo_salam.mp3');
+        const audio = new Audio('assets/allo_salam.mp3');
 
         const triggerFlip = (e) => {
             e.preventDefault();
@@ -172,13 +172,17 @@ function resetPrediction(e) {
     localStorage.removeItem('prediction_2026_id');
     localStorage.removeItem('prediction_2026_name');
 
+    // Get current language or default to 'fr'
+    const currentLang = localStorage.getItem('selectedLang') || 'fr';
+    const texts = translations[currentLang];
+
     // Restore Question Mark UI
     const box = document.getElementById('box-jan-2026');
     if (box) {
         box.innerHTML = `
             <div class="prediction-placeholder" onclick="openPredictionModal()">
                 <div class="question-mark">?</div>
-                <span class="predict-label">PRÉDICTION</span>
+                <span class="predict-label">${texts.predict_label}</span>
             </div>
             <div class="triangle-indicator"></div>
         `;
@@ -189,8 +193,22 @@ function updatePredictionUI(characterId) {
     const box = document.getElementById('box-jan-2026');
     if (!box) return;
 
+    // Get current language or default to 'fr'
+    const currentLang = localStorage.getItem('selectedLang') || 'fr';
+    const texts = translations[currentLang];
+
     const isLocked = localStorage.getItem('prediction_2026_locked') === 'true';
-    const characterName = localStorage.getItem('prediction_2026_name') || '';
+
+    // Resolve dynamic name based on ID and language
+    const safeId = characterId || '';
+    const translationKey = 'name_' + safeId;
+    // Fallback to what was stored if not found (though structure implies ID is key)
+    let characterName = '';
+    if (texts[translationKey]) {
+        characterName = texts[translationKey];
+    } else {
+        characterName = localStorage.getItem('prediction_2026_name') || '';
+    }
 
     // Environment check: Only show reset button if running locally (only for the creator)
     const isLocal = window.location.hostname === 'localhost' ||
@@ -203,19 +221,19 @@ function updatePredictionUI(characterId) {
     // Build the UI
     box.innerHTML = `
         <div class="prediction-result ${isLocked ? 'is-locked' : ''}">
-            <div class="prediction-status-badge">${isLocked ? 'PRÉDICTION VALIDÉE' : 'VOTRE PRÉDICTION'}</div>
+            <div class="prediction-status-badge">${isLocked ? (currentLang === 'fr' ? 'PRÉDICTION VALIDÉE' : 'PREDICTION LOCKED') : (currentLang === 'fr' ? 'VOTRE PRÉDICTION' : 'YOUR PREDICTION')}</div>
             <div class="character-wrapper">
                 <img src="assets/${characterId}.${ext}" class="char-art" alt="Prediction">
                 <div class="card-name-large">${characterName}</div>
             </div>
             ${!isLocked ? `
                 <div class="prediction-controls">
-                    <button class="result-btn btn-changer">CHANGER</button>
-                    <button class="result-btn btn-valider">VALIDER</button>
+                    <button class="result-btn btn-changer">${translations[currentLang].btn_choose === 'CHOISIR' ? 'CHANGER' : 'CHANGE'}</button>
+                    <button class="result-btn btn-valider">${translations[currentLang].btn_choose === 'CHOISIR' ? 'VALIDER' : 'CONFIRM'}</button>
                 </div>
             ` : (isLocal ? `
                 <div class="local-reset-wrapper">
-                    <button class="local-only-reset" title="Réinitialiser (Local uniquement - Créateur)">
+                    <button class="local-only-reset" title="${currentLang === 'fr' ? 'Réinitialiser (Local uniquement - Créateur)' : 'Reset (Local only - Creator)'}">
                         <i class="fas fa-undo"></i>
                     </button>
                 </div>
@@ -238,7 +256,10 @@ function updatePredictionUI(characterId) {
         if (validerBtn) {
             validerBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                if (confirm('Voulez-vous valider cette prédiction ? Vous ne pourrez plus la changer.')) {
+                const confirmMsg = currentLang === 'fr'
+                    ? 'Voulez-vous valider cette prédiction ? Vous ne pourrez plus la changer.'
+                    : 'Do you want to lock this prediction? You will not be able to change it anymore.';
+                if (confirm(confirmMsg)) {
                     lockPrediction();
                 }
             });
@@ -269,3 +290,148 @@ document.addEventListener('DOMContentLoaded', () => {
         updatePredictionUI(savedPrediction);
     }
 });
+/* =========================================
+   Quick Language Selector & Translation
+   ========================================= */
+
+const translations = {
+    fr: {
+        header_title: "Chronologie des sorties majeures : <span class='text-sparking'>Sparking</span>, <span class='text-ll'>Legends Limited</span> & <span class='text-ultra' data-text='Ultra'>Ultra</span>",
+        month_jan: "JANVIER",
+        month_feb: "FÉVRIER",
+        month_mar: "MARS",
+        month_apr: "AVRIL",
+        month_may: "MAI",
+        month_jun: "JUIN",
+        month_jul: "JUILLET",
+        month_aug: "AOÛT",
+        month_sep: "SEPTEMBRE",
+        month_oct: "OCTOBRE",
+        month_nov: "NOVEMBRE",
+        month_dec: "DÉCEMBRE",
+        footer_disclaimer: "©Bird Studio/Shueisha et Toei Animation.<br>©Bandai Namco Entertainment Inc.<br>Site fan non officiel, sans affiliation.",
+        predict_label: "PRÉDICTION",
+        prediction_modal_title: "<span class='large-q'>Q</span>UI SERA LE <span class='highlight-yellow'>PREMIER</span> <br class='mobile-only'>PERSONNAGE MAJEUR <br class='desktop-only'>DU MOIS DE <br class='mobile-only'><span class='highlight-yellow'>JANVIER</span> ?",
+        btn_choose: "CHOISIR",
+        btn_choose: "CHOISIR",
+        lang_button_text: "Langues",
+        name_pred_buu: "BUUHAN",
+        name_pred_hatchiyack: "GOMAH",
+        name_pred_bojack: "BOJACK",
+        name_pred_trunks: "TRUNKS",
+        name_pred_vegeta_ssj3_daima: "VEGETA SSJ3"
+    },
+    en: {
+        header_title: "Major Release Timeline: <span class='text-sparking'>Sparking</span>, <span class='text-ll'>Legends Limited</span> & <span class='text-ultra' data-text='Ultra'>Ultra</span>",
+        month_jan: "JANUARY",
+        month_feb: "FEBRUARY",
+        month_mar: "MARCH",
+        month_apr: "APRIL",
+        month_may: "MAY",
+        month_jun: "JUNE",
+        month_jul: "JULY",
+        month_aug: "AUGUST",
+        month_sep: "SEPTEMBER",
+        month_oct: "OCTOBER",
+        month_nov: "NOVEMBER",
+        month_dec: "DECEMBER",
+        footer_disclaimer: "©Bird Studio/Shueisha and Toei Animation.<br>©Bandai Namco Entertainment Inc.<br>Unofficial fan site, not affiliated.",
+        predict_label: "PREDICTION",
+        prediction_modal_title: "<span class='large-q'>W</span>HO WILL BE THE <span class='highlight-yellow'>FIRST</span> <br class='mobile-only'>MAJOR CHARACTER <br class='desktop-only'>OF <br class='mobile-only'><span class='highlight-yellow'>JANUARY</span> ?",
+        btn_choose: "CHOOSE",
+        lang_button_text: "Language",
+        name_pred_buu: "BUUHAN",
+        name_pred_hatchiyack: "GOMAH",
+        name_pred_bojack: "BOUJACK",
+        name_pred_trunks: "TRUNKS",
+        name_pred_vegeta_ssj3_daima: "SS3 VEGETA",
+        construction_text: "TRAVAUX EN COURS"
+    },
+    en: {
+        header_title: "Major Release Timeline: <span class='text-sparking'>Sparking</span>, <span class='text-ll'>Legends Limited</span> & <span class='text-ultra' data-text='Ultra'>Ultra</span>",
+        month_jan: "JANUARY",
+        month_feb: "FEBRUARY",
+        month_mar: "MARCH",
+        month_apr: "APRIL",
+        month_may: "MAY",
+        month_jun: "JUNE",
+        month_jul: "JULY",
+        month_aug: "AUGUST",
+        month_sep: "SEPTEMBER",
+        month_oct: "OCTOBER",
+        month_nov: "NOVEMBER",
+        month_dec: "DECEMBER",
+        footer_disclaimer: "©Bird Studio/Shueisha and Toei Animation.<br>©Bandai Namco Entertainment Inc.<br>Unofficial fan site, not affiliated.",
+        predict_label: "PREDICTION",
+        prediction_modal_title: "<span class='large-q'>W</span>HO WILL BE THE <span class='highlight-yellow'>FIRST</span> <br class='mobile-only'>MAJOR CHARACTER <br class='desktop-only'>OF <br class='mobile-only'><span class='highlight-yellow'>JANUARY</span> ?",
+        btn_choose: "CHOOSE",
+        lang_button_text: "Language",
+        name_pred_buu: "BUUHAN",
+        name_pred_hatchiyack: "GOMAH",
+        name_pred_bojack: "BOUJACK",
+        name_pred_trunks: "TRUNKS",
+        name_pred_vegeta_ssj3_daima: "SS3 VEGETA",
+        construction_text: "WORK IN PROGRESS"
+    }
+};
+
+function toggleLanguageMenu() {
+    const dropdown = document.getElementById('langDropdown');
+    const btn = document.getElementById('langBtn');
+    dropdown.classList.toggle('show');
+    btn.classList.toggle('active');
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+    const container = document.querySelector('.language-selector');
+    if (container && !container.contains(e.target)) {
+        const dropdown = document.getElementById('langDropdown');
+        const btn = document.getElementById('langBtn');
+        if (dropdown) dropdown.classList.remove('show');
+        if (btn) btn.classList.remove('active');
+    }
+});
+
+function setLanguage(lang) {
+    // 1. Save to localStorage
+    localStorage.setItem('selectedLang', lang);
+
+    // 2. Update all elements with data-i18n
+    const elements = document.querySelectorAll('[data-i18n]');
+    elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            el.innerHTML = translations[lang][key];
+        }
+    });
+
+    // Re-render prediction UI to update text
+    const savedPrediction = localStorage.getItem('prediction_2026_id');
+    if (savedPrediction) {
+        updatePredictionUI(savedPrediction);
+    } else {
+        resetPrediction();
+    }
+
+    // 3. Update active state on language options
+    document.querySelectorAll('.lang-option').forEach(opt => {
+        opt.classList.remove('active');
+    });
+    const activeOption = document.getElementById('lang-' + lang);
+    if (activeOption) {
+        activeOption.classList.add('active');
+    }
+
+    // 4. Close dropdown
+    const dropdown = document.getElementById('langDropdown');
+    const btn = document.getElementById('langBtn');
+    if (dropdown) dropdown.classList.remove('show');
+    if (btn) btn.classList.remove('active');
+}
+
+// Initialize on load
+(function initLanguage() {
+    const savedLang = localStorage.getItem('selectedLang') || 'fr';
+    setLanguage(savedLang);
+})();

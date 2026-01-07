@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nav-styles.css">
 </head>
 
 <body>
@@ -44,26 +45,31 @@
         <!-- New Top Navigation Bar -->
         <nav class="top-nav">
             <div class="top-nav-content">
-                <!-- Search Icon (Left) -->
-                <div class="nav-left">
-                    <svg class="nav-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </div>
+                <!-- Empty left for grid balance -->
+                <div class="nav-left"></div>
 
                 <div class="nav-center">
                     <img src="assets/DragonBallLegends_Logo.png" alt="Dragon Ball Legends" class="nav-logo">
                 </div>
 
-                <!-- Burger Menu (Right) -->
+                <!-- Language Selector -->
                 <div class="nav-right">
-                    <button class="burger-menu" aria-label="Menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
+                    <div class="language-selector">
+                        <button class="lang-btn" onclick="toggleLanguageMenu()" id="langBtn">
+                            <span data-i18n="lang_button_text">Language</span>
+                            <div class="arrow-icon"></div>
+                        </button>
+                        <div class="lang-dropdown" id="langDropdown">
+                            <a href="#" class="lang-option" onclick="setLanguage('fr'); return false;" id="lang-fr">
+                                <span class="lang-flag">🇫🇷</span>
+                                <span>Français</span>
+                            </a>
+                            <a href="#" class="lang-option" onclick="setLanguage('en'); return false;" id="lang-en">
+                                <span class="lang-flag">🇺🇸</span>
+                                <span>English</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -206,6 +212,7 @@
             }, 8000); // Total cycle: 8 seconds (4s normal, 4s transformed)
         });
     </script>
+    <script src="script.js"></script>
 </body>
 
 </html>

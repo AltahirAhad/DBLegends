@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nav-styles.css">
 </head>
 
 <body>
@@ -63,26 +64,31 @@
         <!-- New Top Navigation Bar -->
         <nav class="top-nav">
             <div class="top-nav-content">
-                <!-- Search Icon (Left) -->
-                <div class="nav-left">
-                    <svg class="nav-search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                </div>
+                <!-- Empty left for grid balance -->
+                <div class="nav-left"></div>
 
                 <div class="nav-center">
                     <img src="assets/DragonBallLegends_Logo.png" alt="Dragon Ball Legends" class="nav-logo">
                 </div>
 
-                <!-- Burger Menu (Right) -->
+                <!-- Language Selector -->
                 <div class="nav-right">
-                    <button class="burger-menu" aria-label="Menu">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
+                    <div class="language-selector">
+                        <button class="lang-btn" onclick="toggleLanguageMenu()" id="langBtn">
+                            <span data-i18n="lang_button_text">Language</span>
+                            <div class="arrow-icon"></div>
+                        </button>
+                        <div class="lang-dropdown" id="langDropdown">
+                            <a href="#" class="lang-option" onclick="setLanguage('fr'); return false;" id="lang-fr">
+                                <span class="lang-flag">🇫🇷</span>
+                                <span>Français</span>
+                            </a>
+                            <a href="#" class="lang-option" onclick="setLanguage('en'); return false;" id="lang-en">
+                                <span class="lang-flag">🇺🇸</span>
+                                <span>English</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -93,7 +99,7 @@
         <header class="main-header">
             <div class="header-content">
                 <div class="header-center">
-                    <h1 class="header-title">Chronologie des sorties majeures : <span
+                    <h1 class="header-title" data-i18n="header_title">Chronologie des sorties majeures : <span
                             class="text-sparking">Sparking</span>, <span class="text-ll">Legends Limited</span> & <span
                             class="text-ultra" data-text="Ultra">Ultra</span>
                     </h1>
@@ -137,7 +143,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">JANVIER</div>
+                            <div class="month-label" data-i18n="month_jan">JANVIER</div>
                         </div>
                     </div>
 
@@ -164,7 +170,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">FÉVRIER</div>
+                            <div class="month-label" data-i18n="month_feb">FÉVRIER</div>
                         </div>
                     </div>
 
@@ -192,7 +198,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">MARS</div>
+                            <div class="month-label" data-i18n="month_mar">MARS</div>
                         </div>
                     </div>
 
@@ -216,7 +222,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">AVRIL</div>
+                            <div class="month-label" data-i18n="month_apr">AVRIL</div>
                         </div>
                     </div>
 
@@ -247,7 +253,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">MAI</div>
+                            <div class="month-label" data-i18n="month_may">MAI</div>
                         </div>
                     </div>
 
@@ -279,7 +285,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">JUIN</div>
+                            <div class="month-label" data-i18n="month_jun">JUIN</div>
                         </div>
                     </div>
                 </div>
@@ -314,7 +320,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">JUILLET</div>
+                            <div class="month-label" data-i18n="month_jul">JUILLET</div>
                         </div>
                     </div>
 
@@ -337,7 +343,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">AOÛT</div>
+                            <div class="month-label" data-i18n="month_aug">AOÛT</div>
                         </div>
                     </div>
 
@@ -361,7 +367,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">SEPTEMBRE</div>
+                            <div class="month-label" data-i18n="month_sep">SEPTEMBRE</div>
                         </div>
                     </div>
 
@@ -386,7 +392,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">OCTOBRE</div>
+                            <div class="month-label" data-i18n="month_oct">OCTOBRE</div>
                         </div>
                     </div>
 
@@ -409,7 +415,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">NOVEMBRE</div>
+                            <div class="month-label" data-i18n="month_nov">NOVEMBRE</div>
                         </div>
                     </div>
 
@@ -436,7 +442,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">DÉCEMBRE</div>
+                            <div class="month-label" data-i18n="month_dec">DÉCEMBRE</div>
                         </div>
                     </div>
                 </div>
@@ -480,7 +486,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">MARS</div>
+                            <div class="month-label" data-i18n="month_mar">MARS</div>
                         </div>
                     </div>
                     <div class="month-item">
@@ -615,7 +621,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">JANVIER</div>
+                            <div class="month-label" data-i18n="month_jan">JANVIER</div>
                         </div>
                     </div>
                     <!-- Future months (Coming Soon) -->
@@ -628,7 +634,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">FÉVRIER</div>
+                            <div class="month-label" data-i18n="month_feb">FÉVRIER</div>
                         </div>
                     </div>
                     <div class="month-item coming-soon">
@@ -640,7 +646,7 @@
                                 <div class="dot"></div>
                                 <div class="line"></div>
                             </div>
-                            <div class="month-label">MARS</div>
+                            <div class="month-label" data-i18n="month_mar">MARS</div>
                         </div>
                     </div>
                 </div>
@@ -653,8 +659,8 @@
                 <!-- Header Section -->
                 <div class="prediction-modal-section modal-header-section">
                     <div class="modal-header">
-                        <h2><span class="large-q">Q</span>UI SERA LE <span class="highlight-yellow">PREMIER</span><br
-                                class="mobile-only">
+                        <h2 data-i18n="prediction_modal_title"><span class="large-q">Q</span>UI SERA LE <span
+                                class="highlight-yellow">PREMIER</span><br class="mobile-only">
                             PERSONNAGE MAJEUR <br class="desktop-only">DU MOIS DE <br class="mobile-only">
                             <span class="highlight-yellow">JANVIER</span> ?
                         </h2>
@@ -674,7 +680,7 @@
                                 <div class="prediction-card-large">
                                     <div class="character-wrapper">
                                         <img src="assets/pred_buu.jpg" class="char-art" alt="Buuhan">
-                                        <div class="card-name-large">BUUHAN</div>
+                                        <div class="card-name-large" data-i18n="name_pred_buu">BUUHAN</div>
                                     </div>
                                 </div>
                             </li>
@@ -683,7 +689,7 @@
                                 <div class="prediction-card-large">
                                     <div class="character-wrapper">
                                         <img src="assets/pred_hatchiyack.png" class="char-art" alt="Gomah">
-                                        <div class="card-name-large">GOMAH</div>
+                                        <div class="card-name-large" data-i18n="name_pred_hatchiyack">GOMAH</div>
                                     </div>
                                 </div>
                             </li>
@@ -692,7 +698,7 @@
                                 <div class="prediction-card-large">
                                     <div class="character-wrapper">
                                         <img src="assets/pred_bojack.png" class="char-art" alt="Bojack">
-                                        <div class="card-name-large">BOJACK</div>
+                                        <div class="card-name-large" data-i18n="name_pred_bojack">BOJACK</div>
                                     </div>
                                 </div>
                             </li>
@@ -701,7 +707,7 @@
                                 <div class="prediction-card-large">
                                     <div class="character-wrapper">
                                         <img src="assets/pred_trunks.png" class="char-art" alt="Trunks">
-                                        <div class="card-name-large">TRUNKS</div>
+                                        <div class="card-name-large" data-i18n="name_pred_trunks">TRUNKS</div>
                                     </div>
                                 </div>
                             </li>
@@ -711,7 +717,8 @@
                                     <div class="character-wrapper">
                                         <img src="assets/pred_vegeta_ssj3_daima.jpg" class="char-art"
                                             alt="Vegeta SSJ3 Daima">
-                                        <div class="card-name-large">VEGETA SSJ3</div>
+                                        <div class="card-name-large" data-i18n="name_pred_vegeta_ssj3_daima">VEGETA SSJ3
+                                        </div>
                                     </div>
                                 </div>
                             </li>
@@ -726,7 +733,8 @@
                 <!-- Footer Section -->
                 <div class="prediction-modal-section modal-footer-section">
                     <div class="modal-actions">
-                        <button class="choose-btn-large" onclick="submitCurrentPrediction()">CHOISIR</button>
+                        <button class="choose-btn-large" onclick="submitCurrentPrediction()"
+                            data-i18n="btn_choose">CHOISIR</button>
                     </div>
                 </div>
             </div>
@@ -736,7 +744,7 @@
         <div id="construction-modal" class="modal-overlay" onclick="closeConstructionModal()">
             <div class="modal-content" onclick="event.stopPropagation()">
                 <img src="assets/construction_icon.png" alt="Under Construction" class="construction-icon">
-                <p class="construction-text">TRAVAUX EN COURS</p>
+                <p class="construction-text" data-i18n="construction_text">TRAVAUX EN COURS</p>
             </div>
         </div>
         <script>
@@ -756,7 +764,7 @@
         </script>
         <footer class="main-footer">
             <div class="footer-content">
-                <div class="footer-disclaimer">
+                <div class="footer-disclaimer" data-i18n="footer_disclaimer">
                     ©Bird Studio/Shueisha et Toei Animation.<br>
                     ©Bandai Namco Entertainment Inc.<br>
                     Site fan non officiel, sans affiliation.
